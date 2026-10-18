@@ -19,7 +19,7 @@ This repository **is** the plugin package: `package.json` at the root declares `
 DSH reads plugin market indexes in [format 1](https://github.com/deepseek-ai/deepseek-harness). This repository publishes one at [`market.json`](market.json). Add the index URL in **Settings 鈫?Plugins 鈫?Discover**:
 
 ```
-https://cdn.jsdelivr.net/gh/yis2014/dsh-session-delete@main/market.json
+https://cdn.jsdelivr.net/gh/yis2014/dsh-session-delete@latest/market.json
 ```
 
 Fallback if jsDelivr is unreachable:
@@ -100,4 +100,5 @@ The built-in bundle catalog (`dsh-base` / `dsh-web-app` rows) is shipped read-on
 ## License
 
 MIT
+
 
