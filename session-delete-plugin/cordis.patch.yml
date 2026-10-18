@@ -1,0 +1,6 @@
+# Session Delete: the sidebar Session menu row, its confirmation dialog, and
+# the Host operation that removes a Session's log, projection cache, and
+# workspace accounting.
+- insert:
+    - id: session-delete
+      name: '@local/dsh-session-delete'

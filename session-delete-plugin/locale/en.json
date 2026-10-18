@@ -1,0 +1,29 @@
+{
+  "meta": {
+    "title": "Session Delete",
+    "description": "Adds Delete session to a sidebar Session's menu: removes the Session log, its projection cache, and its workspace accounting, stopping running work after confirmation."
+  },
+  "menu.delete": "Delete session",
+  "dialog.title": "Delete session",
+  "dialog.desc": "“{title}” will be permanently deleted: its session log, projection cache, and workspace accounting are removed. This cannot be undone.",
+  "dialog.untitled": "Untitled session",
+  "dialog.runningNotice": "This session is running. Deleting it stops its running work first.",
+  "dialog.busyDesc": "“{title}” still has work running. Continuing stops that work and then deletes the session.",
+  "dialog.activity": "Running work",
+  "dialog.cancel": "Cancel",
+  "dialog.delete": "Delete",
+  "dialog.forceDelete": "Delete anyway",
+  "dialog.pending": "Stopping running work and deleting…",
+  "dialog.error": "The session could not be deleted.",
+  "activity.turn": "The turn in progress",
+  "activity.subagent.one": "1 running subagent: {names}",
+  "activity.subagent.other": "{n} running subagents: {names}",
+  "activity.job.one": "1 background job: {names}",
+  "activity.job.other": "{n} background jobs: {names}",
+  "activity.schedule.one": "1 scheduled reminder: {names}",
+  "activity.schedule.other": "{n} scheduled reminders: {names}",
+  "activity.other.one": "1 running item ({kind}): {names}",
+  "activity.other.other": "{n} running items ({kind}): {names}",
+  "toast.deleted": "Session deleted",
+  "toast.failed": "Delete failed: {message}"
+}

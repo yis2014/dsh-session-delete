@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Delete session">
+  <rect x="1" y="1" width="30" height="30" rx="8" fill="#4D6BFE"/>
+  <path d="M11 9.5h10M13.5 9.5V8h5v1.5M10.5 11h11l-.9 11.2a2 2 0 0 1-2 1.8h-5.2a2 2 0 0 1-2-1.8L10.5 11Z" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M14 14.5v5.5M18 14.5v5.5" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+</svg>

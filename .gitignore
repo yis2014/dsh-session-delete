@@ -1,0 +1,10 @@
+# This directory is a scratch workspace for DSH. Only the delivered plugin and
+# its verification tooling belong to the repository.
+/*
+!/.gitignore
+!/session-delete-plugin/
+!/session-delete-tools/
+
+# Verification screenshots are kept locally: they contain session titles and
+# account UI from the machine that produced them.
+/session-delete-tools/*.png
