@@ -2,49 +2,45 @@
 
 A [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) plugin that adds **删除会话 / Delete session** to the sidebar Session row `...` menu. Confirming permanently removes the Session's durable log, its projection-cache record, and its workspace accounting; a running Session is stopped first after an explicit second confirmation.
 
+This repository **is** the plugin package: `package.json` at the root declares `dsh.bundle` and `dsh.client`, so the repository can be installed directly as a bundle.
+
 | | |
 |---|---|
 | Package | `@local/dsh-session-delete` (bundle row id `session-delete`) |
-| Plugin source | [`session-delete-plugin/`](session-delete-plugin/README.md) |
+| Version | 1.0.1 |
 | Requires | DSH `>=0.2.1-rc.2 <0.3.0` |
 | UI | sidebar Session menu (order 500) + a frame-wide confirmation dialog |
+| Host route | authenticated `POST /api/session.delete` |
 
 ## Install
 
 ### From the plugin market (one click)
 
-DSH reads plugin market indexes in [format 1](https://github.com/deepseek-ai/deepseek-harness). This repository publishes one at [`market.json`](market.json). Add the index URL in **Settings → Plugins → Discover** (or wherever the plugin market source list is shown):
+DSH reads plugin market indexes in [format 1](https://github.com/deepseek-ai/deepseek-harness). This repository publishes one at [`market.json`](market.json). Add the index URL in **Settings → Plugins → Discover**:
 
 ```
 https://cdn.jsdelivr.net/gh/yis2014/dsh-session-delete@main/market.json
 ```
 
-Fallback URL if jsDelivr is unreachable:
+Fallback if jsDelivr is unreachable:
 
 ```
 https://raw.githubusercontent.com/yis2014/dsh-session-delete/main/market.json
 ```
 
-The entry installs the exact commit pinned in the index, so a cached index never installs different code. The index parses with the official `@deepseek-ai/dsh-plugin-market-index` validator, and the entry's install target is `git+https://github.com/yis2014/dsh-session-delete.git#026a7a1…&path:/session-delete-plugin`.
+The index pins an exact commit per version, so a cached copy never installs different code.
 
-> The Discover tab and market sources come from the optional `@deepseek-ai/dsh-experimental-plugin-market-bundle` row. Profiles that leave it disabled can still install with the direct spec below; no market UI is required.
+> Discover and market sources come from the optional `@deepseek-ai/dsh-experimental-plugin-market-bundle` row. Profiles that leave it disabled can install with the direct spec below.
 
 ### Direct install
 
 Pass this pnpm spec to `plugin_manager`'s `install_bundle` (the Plugin Manager's add action or the agent tool):
 
 ```
-git+https://github.com/yis2014/dsh-session-delete.git#026a7a11001c129cbd83908d6420374dcfd5243c&path:/session-delete-plugin
+git+https://github.com/yis2014/dsh-session-delete.git#<commit>
 ```
 
-The commit is the one pinned in [`market.json`](market.json) (`plugins[0].versions[0].source.commit`). This exact spec was installed into a clean pnpm project during verification and resolved to `@local/dsh-session-delete 1.0.0` from the pinned commit. To regenerate the spec from the index, see [`session-delete-tools/validate-market.mjs`](session-delete-tools/README.md).
-
-### Where it appears
-
-The built-in bundle catalog (`dsh-base` / `dsh-web-app` rows) is shipped read-only, so a third-party plugin cannot be inserted into it. The supported surfaces are:
-
-- **已安装插件 / Installed plugins** in Plugin Manager — the row appears here automatically after `install_bundle`.
-- **Discover** — when the plugin-market bundle is enabled, add the index URL above and the entry appears with title, description, icon, category, and a one-click install.
+The current commit is in [`market.json`](market.json) (`plugins[0].versions[0].source.commit`). Because the package sits at the repository root, no `path:` parameter is needed. This spec was installed into a clean pnpm project during verification and resolved to `@local/dsh-session-delete` from the pinned commit.
 
 ### From a local checkout
 
@@ -52,7 +48,7 @@ The built-in bundle catalog (`dsh-base` / `dsh-web-app` rows) is shipped read-on
 git clone https://github.com/yis2014/dsh-session-delete.git
 ```
 
-Then install the absolute path of `session-delete-plugin/` through `install_bundle`. This is what the development profile does.
+Then pass the absolute path of the checkout to `install_bundle`; the package manifest is at the root.
 
 ### Manual composition
 
@@ -74,7 +70,22 @@ If you compose the profile by hand, insert the row:
 
 Connected pages drop the row through `api-session/removed`; pages that reload ask the Host to re-announce the removal, because a live Agent can still carry the Session in the Host's in-memory registry. The derived search index reconciles itself on the next search.
 
-Sessions with running work are refused first with the activity families the Host composes (turn, subagents, jobs, schedule). The dialog lists them and offers **仍要删除**; confirming cancels the turn and the other providers, waits for idle, then deletes.
+## Running Sessions
+
+A Session with running work is refused first with the activity families the Host composes (the turn in progress, running subagents, background jobs, scheduled reminders). The dialog lists that work and offers **仍要删除**; confirming cancels the turn and the other providers the way the user's own stop actions do, waits for the Agent to reach idle, and then deletes.
+
+## Implementation
+
+- **Host half** ([`index.js`](index.js)) registers one authenticated exact Fetch route, `POST /api/session.delete`. Connection applies its Host/Origin and browser-credential checks before the handler runs. The handler stops activity on `force`, detaches workspace accounting, removes the log directory, deletes the projection-cache record until it stays absent, and emits `api-session/removed`. A `POST /api/session.delete.sweep` route lets a newly loaded page remove a live Session's resurrected row.
+- **Client half** ([`client.js`](client.js)) registers the sidebar menu row (`session-delete.delete`, order 500) and one `shell.overlay` dialog. It reuses the host primitives (`MenuItemButton`, `Modal`, `Button`) and the client locale service; fallbacks keep the row usable if those primitives are absent.
+- **Locales and icon**: [`locale/en.json`](locale/en.json), [`locale/zh.json`](locale/zh.json), [`icon.svg`](icon.svg).
+
+## Where it appears
+
+The built-in bundle catalog (`dsh-base` / `dsh-web-app` rows) is shipped read-only, so a third-party plugin cannot be inserted into it. The supported surfaces are:
+
+- **已安装插件 / Installed plugins** in Plugin Manager — appears automatically after `install_bundle`.
+- **Discover** — with the plugin-market bundle enabled, add the index URL above and install the entry with title, description, icon, category, and one click.
 
 ## Boundaries
 
@@ -84,7 +95,7 @@ Sessions with running work are refused first with the activity families the Host
 
 ## Verification tooling
 
-[`session-delete-tools/`](session-delete-tools/) contains the checks used to build this plugin: an authenticated API client (`test-api.mjs`), a CDP driver for the live Web GUI (`cdp.mjs`), an asar extractor (`asar-tool.mjs`), and the market-index validator wrapper (`validate-market.mjs`). Screenshots are intentionally not committed because they contain local session titles and account UI.
+[`tools/`](tools/README.md) contains the checks used to build this plugin: an authenticated API client, a CDP driver for the live Web GUI, an asar extractor, and market-index validators. Screenshots are intentionally not committed because they contain local session titles and account UI.
 
 ## License
 

@@ -1,17 +1,20 @@
-# This directory is a scratch workspace for DSH. Only the delivered plugin, its
-# market index, the root README, and the verification tooling are tracked.
+# This directory is a scratch workspace for DSH. The repository is the plugin
+# package itself: every root file below is part of the published package.
 /*
 !/.gitignore
 !/README.md
 !/market.json
-!/session-delete-plugin/
-!/session-delete-tools/
+!/package.json
+!/index.js
+!/client.js
+!/cordis.patch.yml
+!/icon.svg
+!/locale/
+!/tools/
 
 # Extracted third-party packages used while validating the market index.
-/session-delete-tools/.market/
-/session-delete-tools/.extract*/
-/session-delete-tools/.base/
+/tools/.*/
 
 # Verification screenshots are kept locally: they contain session titles and
 # account UI from the machine that produced them.
-/session-delete-tools/*.png
+/tools/*.png

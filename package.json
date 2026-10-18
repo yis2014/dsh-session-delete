@@ -1,7 +1,6 @@
 {
   "name": "@local/dsh-session-delete",
-  "version": "1.0.0",
-  "private": true,
+  "version": "1.0.1",
   "description": "Delete a Session completely from the sidebar Session menu: its log, projection cache, and workspace accounting.",
   "type": "module",
   "exports": {
