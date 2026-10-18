@@ -1,0 +1,63 @@
+{
+  "format": 1,
+  "title": {
+    "en": "DSH Session Delete",
+    "zh": "DSH 删除会话"
+  },
+  "description": {
+    "en": "A plugin market index for the Session Delete bundle: permanently remove a Session's log, projection cache, and workspace accounting from the sidebar Session menu.",
+    "zh": "“删除会话”插件的插件市场索引：在侧栏会话菜单里彻底删除会话日志、投影缓存与工作区记账。"
+  },
+  "metadata": {
+    "categories": {
+      "session": {
+        "title": { "en": "Session management", "zh": "会话管理" }
+      }
+    },
+    "labels": {
+      "destructive": {
+        "title": { "en": "Destructive", "zh": "破坏性操作" }
+      }
+    }
+  },
+  "plugins": [
+    {
+      "name": "@local/dsh-session-delete",
+      "title": {
+        "en": "Session Delete",
+        "zh": "删除会话"
+      },
+      "description": {
+        "en": "Adds Delete session to a sidebar Session's menu: permanently removes its log, projection cache, and workspace accounting, and stops running work after confirmation.",
+        "zh": "在侧栏会话行的“...”菜单里添加“删除会话”：确认后删除会话日志、投影缓存与工作区记账；运行中的会话会先提示，仍要删除时停止其运行再删除。"
+      },
+      "icon": "./session-delete-plugin/icon.svg",
+      "author": "yis2014",
+      "homepage": "https://github.com/yis2014/dsh-session-delete",
+      "repository": {
+        "url": "https://github.com/yis2014/dsh-session-delete",
+        "directory": "session-delete-plugin"
+      },
+      "metadata": {
+        "category": "session",
+        "labels": ["destructive"],
+        "keywords": ["session", "delete", "trash", "cleanup", "sidebar", "删除会话"]
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "publishTimestamp": 1792313000,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/yis2014/dsh-session-delete",
+            "commit": "026a7a11001c129cbd83908d6420374dcfd5243c",
+            "path": "session-delete-plugin"
+          },
+          "engines": {
+            "dsh": ">=0.2.1-rc.2 <0.3.0"
+          }
+        }
+      ]
+    }
+  ]
+}
