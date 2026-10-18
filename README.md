@@ -25,21 +25,26 @@ Fallback URL if jsDelivr is unreachable:
 https://raw.githubusercontent.com/yis2014/dsh-session-delete/main/market.json
 ```
 
-The entry installs the exact commit pinned in the index, so a cached index never installs different code.
+The entry installs the exact commit pinned in the index, so a cached index never installs different code. The index parses with the official `@deepseek-ai/dsh-plugin-market-index` validator, and the entry's install target is `git+https://github.com/yis2014/dsh-session-delete.git#026a7a1…&path:/session-delete-plugin`.
+
+> The Discover tab and market sources come from the optional `@deepseek-ai/dsh-experimental-plugin-market-bundle` row. Profiles that leave it disabled can still install with the direct spec below; no market UI is required.
 
 ### Direct install
 
-Pass the pnpm spec below to `plugin_manager`'s `install_bundle` (the Plugin Manager's add action or the agent tool):
+Pass this pnpm spec to `plugin_manager`'s `install_bundle` (the Plugin Manager's add action or the agent tool):
 
 ```
-git+https://github.com/yis2014/dsh-session-delete.git#<commit>&path:/session-delete-plugin
+git+https://github.com/yis2014/dsh-session-delete.git#026a7a11001c129cbd83908d6420374dcfd5243c&path:/session-delete-plugin
 ```
 
-The current commit is in [`market.json`](market.json) (`plugins[0].versions[0].source.commit`). The generated spec is also printed by:
+The commit is the one pinned in [`market.json`](market.json) (`plugins[0].versions[0].source.commit`). This exact spec was installed into a clean pnpm project during verification and resolved to `@local/dsh-session-delete 1.0.0` from the pinned commit. To regenerate the spec from the index, see [`session-delete-tools/validate-market.mjs`](session-delete-tools/README.md).
 
-```
-node session-delete-tools/validate-market.mjs
-```
+### Where it appears
+
+The built-in bundle catalog (`dsh-base` / `dsh-web-app` rows) is shipped read-only, so a third-party plugin cannot be inserted into it. The supported surfaces are:
+
+- **已安装插件 / Installed plugins** in Plugin Manager — the row appears here automatically after `install_bundle`.
+- **Discover** — when the plugin-market bundle is enabled, add the index URL above and the entry appears with title, description, icon, category, and a one-click install.
 
 ### From a local checkout
 
