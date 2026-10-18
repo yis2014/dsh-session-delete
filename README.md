@@ -1,6 +1,6 @@
-# DSH Session Delete
+﻿# DSH Session Delete
 
-A [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) plugin that adds **删除会话 / Delete session** to the sidebar Session row `...` menu. Confirming permanently removes the Session's durable log, its projection-cache record, and its workspace accounting; a running Session is stopped first after an explicit second confirmation.
+A [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) plugin that adds **鍒犻櫎浼氳瘽 / Delete session** to the sidebar Session row `...` menu. Confirming permanently removes the Session's durable log, its projection-cache record, and its workspace accounting; a running Session is stopped first after an explicit second confirmation.
 
 This repository **is** the plugin package: `package.json` at the root declares `dsh.bundle` and `dsh.client`, so the repository can be installed directly as a bundle.
 
@@ -16,7 +16,7 @@ This repository **is** the plugin package: `package.json` at the root declares `
 
 ### From the plugin market (one click)
 
-DSH reads plugin market indexes in [format 1](https://github.com/deepseek-ai/deepseek-harness). This repository publishes one at [`market.json`](market.json). Add the index URL in **Settings → Plugins → Discover**:
+DSH reads plugin market indexes in [format 1](https://github.com/deepseek-ai/deepseek-harness). This repository publishes one at [`market.json`](market.json). Add the index URL in **Settings 鈫?Plugins 鈫?Discover**:
 
 ```
 https://cdn.jsdelivr.net/gh/yis2014/dsh-session-delete@main/market.json
@@ -37,7 +37,7 @@ The index pins an exact commit per version, so a cached copy never installs diff
 Pass this pnpm spec to `plugin_manager`'s `install_bundle` (the Plugin Manager's add action or the agent tool):
 
 ```
-git+https://github.com/yis2014/dsh-session-delete.git#<commit>
+git+https://github.com/yis2014/dsh-session-delete.git#075e2bbe88edee74c8c559ec58d0dc49e4253127
 ```
 
 The current commit is in [`market.json`](market.json) (`plugins[0].versions[0].source.commit`). Because the package sits at the repository root, no `path:` parameter is needed. This spec was installed into a clean pnpm project during verification and resolved to `@local/dsh-session-delete` from the pinned commit.
@@ -72,7 +72,7 @@ Connected pages drop the row through `api-session/removed`; pages that reload as
 
 ## Running Sessions
 
-A Session with running work is refused first with the activity families the Host composes (the turn in progress, running subagents, background jobs, scheduled reminders). The dialog lists that work and offers **仍要删除**; confirming cancels the turn and the other providers the way the user's own stop actions do, waits for the Agent to reach idle, and then deletes.
+A Session with running work is refused first with the activity families the Host composes (the turn in progress, running subagents, background jobs, scheduled reminders). The dialog lists that work and offers **浠嶈鍒犻櫎**; confirming cancels the turn and the other providers the way the user's own stop actions do, waits for the Agent to reach idle, and then deletes.
 
 ## Implementation
 
@@ -84,8 +84,8 @@ A Session with running work is refused first with the activity families the Host
 
 The built-in bundle catalog (`dsh-base` / `dsh-web-app` rows) is shipped read-only, so a third-party plugin cannot be inserted into it. The supported surfaces are:
 
-- **已安装插件 / Installed plugins** in Plugin Manager — appears automatically after `install_bundle`.
-- **Discover** — with the plugin-market bundle enabled, add the index URL above and install the entry with title, description, icon, category, and one click.
+- **宸插畨瑁呮彃浠?/ Installed plugins** in Plugin Manager 鈥?appears automatically after `install_bundle`.
+- **Discover** 鈥?with the plugin-market bundle enabled, add the index URL above and install the entry with title, description, icon, category, and one click.
 
 ## Boundaries
 
@@ -100,3 +100,4 @@ The built-in bundle catalog (`dsh-base` / `dsh-web-app` rows) is shipped read-on
 ## License
 
 MIT
+

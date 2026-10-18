@@ -31,12 +31,11 @@
         "en": "Adds Delete session to a sidebar Session's menu: permanently removes its log, projection cache, and workspace accounting, and stops running work after confirmation.",
         "zh": "在侧栏会话行的“...”菜单里添加“删除会话”：确认后删除会话日志、投影缓存与工作区记账；运行中的会话会先提示，仍要删除时停止其运行再删除。"
       },
-      "icon": "./session-delete-plugin/icon.svg",
+      "icon": "./icon.svg",
       "author": "yis2014",
       "homepage": "https://github.com/yis2014/dsh-session-delete",
       "repository": {
-        "url": "https://github.com/yis2014/dsh-session-delete",
-        "directory": "session-delete-plugin"
+        "url": "https://github.com/yis2014/dsh-session-delete"
       },
       "metadata": {
         "category": "session",
@@ -45,13 +44,12 @@
       },
       "versions": [
         {
-          "version": "1.0.0",
-          "publishTimestamp": 1792313000,
+          "version": "1.0.1",
+          "publishTimestamp": 1792314059,
           "source": {
             "type": "git",
             "url": "https://github.com/yis2014/dsh-session-delete",
-            "commit": "026a7a11001c129cbd83908d6420374dcfd5243c",
-            "path": "session-delete-plugin"
+            "commit": "075e2bbe88edee74c8c559ec58d0dc49e4253127"
           },
           "engines": {
             "dsh": ">=0.2.1-rc.2 <0.3.0"

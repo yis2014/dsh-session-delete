@@ -1,4 +1,4 @@
-# This directory is a scratch workspace for DSH. The repository is the plugin
+﻿# This directory is a scratch workspace for DSH. The repository is the plugin
 # package itself: every root file below is part of the published package.
 /*
 !/.gitignore
@@ -18,3 +18,4 @@
 # Verification screenshots are kept locally: they contain session titles and
 # account UI from the machine that produced them.
 /tools/*.png
+
